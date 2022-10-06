@@ -1,40 +1,89 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-#include "linkedlistClass.cpp"
 
-// linked list m head ka address store krna
-void print(Node *head){ 
-    Node *temp = head; // use temp taaki head ka address lost na ho
+class Node{
+    public:
+        int data;
+        Node* next;
+
+    Node(int data){
+        this -> data = data;
+        this -> next = NULL;
+    }
+};
+
+void insertAtHead(Node* &head, int d){
+
+    // create new node
+    Node* temp = new Node(d);
+    temp -> next = head;
+    head = temp;
+}
+
+void insertAtTail(Node* &tail, int d){
+    // create new node
+    Node* temp = new Node(d);
+    tail -> next = temp;
+    tail = tail -> next;
+}
+
+void insertAtPosition(Node* &head, Node* &tail,  int pos, int d){
+    Node* temp = head;
+    int count = 1;
+
+    if(pos == 1){
+        insertAtHead(head, d);
+        return;
+    }
+
+    if(temp -> next == NULL){
+        insertAtTail(head, d);
+    }
+
+    while(count < pos - 1){
+        temp = temp -> next;
+        count++;
+    }
+
+    // creating new node for d
+    Node* NodeToInsert = new Node(d);
+    NodeToInsert -> next = temp -> next;
+     temp -> next = NodeToInsert;
+}
+
+void print(Node* &head){
+    Node* temp = head;
+
     while(temp != NULL){
-        cout << temp -> data << " ";
+        cout << temp -> data << " "; 
         temp = temp -> next;
     }
 }
 
 int main(){
-    // Statically
-    Node n1(1);
-    Node *head = &n1;
 
-    Node n2(2);
-    Node n3(3);
-    Node n4(4);
-    Node n5(5); 
+    Node* node1 = new Node(10);
+    cout << node1 -> data << endl;
+    cout << node1 -> next << endl;
 
-    n1.next = &n2;
-    n2.next = &n3;
-    n3.next = &n4;
-    n4.next = &n5;
+    // head pointed to node1
+    Node* head = node1;
+    Node* tail = node1;
+    
+    print(head);
+    cout << endl;
+
+    insertAtTail(tail, 12);
 
     print(head);
-    //cout << n1.data << " " << n2.data;
-    
-    /*
-    // Dynamically
-    Node *n3 = new Node(10);
-    Node *head = n3;
-    Node *n4 = new Node(20);
+    cout << endl;
 
-    n3 -> next = n4;
-    */
+    insertAtHead(head, 15);
+
+    print(head);
+    cout << endl;
+
+    insertAtPosition(head, tail, 3, 22);
+    print(head);
+    return 0;
 }
