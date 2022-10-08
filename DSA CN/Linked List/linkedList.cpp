@@ -26,6 +26,17 @@ class Node{
 
 void insertAtHead(Node* &head, int d){
 
+    if(head == NULL){
+        Node* temp = new Node(d);
+        head = temp;
+    }
+
+    else{
+        Node* temp = new Node(d);
+        temp -> next = head;
+        head -> prev = temp;
+        head = temp;
+    }
     // create new node
     Node* temp = new Node(d);
     temp -> next = head;
@@ -56,6 +67,11 @@ void insertAtPosition(Node* &head, Node* &tail,  int pos, int d){
         temp = temp -> next;
         count++;
     }
+
+    // if(temp -> next == NULL){
+    //     insertAtTail(tail, d);
+    //     return;
+    // }
 
     // creating new node for d
     Node* NodeToInsert = new Node(d);
