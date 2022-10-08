@@ -6,4 +6,12 @@ class Queue{
     int front;
     int rear;
     int size;
+
+    public: 
+        Queue(){
+            size = 100001;
+            arr = new int[size];
+            front = 0;
+            rear = 0;
+        }
 };
