@@ -13,7 +13,8 @@ int main()
             }
             else if(i % j == 0){
                 break;
-            }
+            }          
+            
         }
     }
     

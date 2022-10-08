@@ -10,6 +10,5 @@ int main()
     // changes k mai bhi reflect honge
     // sirf j++ kr skte
     // agar k aur j dono ke aage const lga diya toh na j++ na k++
-    
     return 0;
 }
