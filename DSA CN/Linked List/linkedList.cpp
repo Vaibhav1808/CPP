@@ -5,6 +5,7 @@ class Node{
     public:
         int data;
         Node* next;
+        
 
     // constructor
     Node(int data){
@@ -34,13 +35,8 @@ void insertAtHead(Node* &head, int d){
     else{
         Node* temp = new Node(d);
         temp -> next = head;
-        head -> prev = temp;
         head = temp;
     }
-    // create new node
-    Node* temp = new Node(d);
-    temp -> next = head;
-    head = temp;
 }
 
 void insertAtTail(Node* &tail, int d){

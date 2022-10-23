@@ -1,95 +1,74 @@
+//Insertion Sort Using In-Place Algorithm
 #include <bits/stdc++.h>
 using namespace std;
 
-#define l long
-#define fl float
-#define du double
-#define ll long long int
+//Creating Insertion Sort void function for in place
 
-#define si set<int>
-#define sll set<ll>
-#define vi vector<int>
-#define vvi vector<vi>
-#define vll vector<ll>
-#define vpi vector<pi>
-#define pll pair<ll, ll>
-#define pi pair<int, int>
-#define mii map<int, int>
-
-#define fi first
-#define se second
-#define mp make_pair
-#define pb push_back
-#define pob pop_back
-#define pf pop_front
-#define cnt(a) while(a--)
-#define sortv(a) sort(all(a))
-#define uniqv(a) unique(all(a))
-#define type(a) typeid(a).name()
-#define all(a) a.begin(), a.end()
-#define tov(a, b) a.assign(all(b))
-#define minv(a) *min_element(all(a))
-#define maxv(a) *max_element(all(a))
-#define ub(a, b) upper_bound(all(a), b)
-#define lb(a, b) lower_bound(all(a), b)
-#define rsortv(a) sort(all(a), greater<int>())
-#define rep(a, b, c) for(int(a) = (b); (a) < (c); (a)++)
-
-const ll INF = 1e18;
-const int32_t M = 1e9 + 7;
-const double PI = acos(-1);
-const int32_t MM = 998244353;
-const ll INFF = 1000000000000000005ll;
-
-#include <ext/pb_ds/tree_policy.hpp>
-
-// -------------------------------------------------------------------------------------------------------------------------------
-
-int main() {
-	ios::sync_with_stdio(NULL), cin.tie(0), cout.tie(0);
-    cout.setf(ios::fixed), cout.precision(20);
-
-
-	ll t;
-	cin >> t;
-	
-	cnt(t){
-	    ll n;
-	    cin >> n;
-        
-        ll arr[n];
-        
-        rep(i,0,n){
-            cin >> arr[i];
+void insertion_sort_IP(int arr[],int n){
+    //Initialising variables i and j
+    int i=0,j=i+1;
+    while(j<=n-1){
+        int temp=arr[j];
+        while(i>=0){
+            if(arr[i]>temp){
+                arr[i+1]=arr[i];
+                i--;
+            }
+            if(i==-1){arr[0]=temp;break;}
+            if(arr[i]<=temp){arr[i+1]=temp;break;}
         }
-        
-         ll ans[n] = {0};
-         rep(i,0,n){
-             ans[arr[i]]++;
+        j++;
+        i=j-1;
+    }
+    return;
+}
+
+//Insertion Sort Using Out-Place Algorithm
+void insertion_sort_OP(int arr[],int si,int ei){
+    //si=starting index
+    //ei=ending index
+    if(si==ei){return;}
+    int j=si+1;
+    int temp=arr[j];
+    while(si>=0){
+        if(arr[si]>temp){
+            arr[si+1]=arr[si];
+            si--;
         }
-        rep(i,0,n){
-            cout << ans[arr[i]] << " ";
-        }
-    //     int ans[n];
-    //     int index = 0;
-    
-    //     for(int i = 0; i < n; i++){
-    //         int k = 1;
-    //         for(int j = 0; j < n; j++){
-    //             if(arr[j] == arr[i] && j != i){
-    //             k++;
-    //             }
-    //         }
-    //     ans[index] = k;
-    //     index++;
-    // }
-        
-        
-        sort(ans, ans + n);
-        
-        cout << n-ans[n-1] << endl;
-        
-        
-	}
-	return 0;
+        if(si==-1){arr[0]=temp;break;}
+        if(arr[si]<=temp){arr[si+1]=temp;break;}
+    }
+    insertion_sort_OP(arr,si+1,ei);
+}
+//Function to print array
+void printarr(int arr[],int n){
+    for(int i=0;i<n;i++){cout<<arr[i]<<" ";}
+}
+
+int main(){
+    int n;
+    //Taking Input array
+    cout<<"ENTER NUMBER OF ELEMENTS IN THE ARRAY: ";
+    cin>>n;
+    int arr[n],arr2[n];//Two array with same size and elements
+    cout<<"ENTER ELEMENTS OF ARRAY SEPERATED BY SPACE: ";
+    for(int i=0;i<n;i++){cin>>arr[i];}
+    //copying arr to arr2
+    for(int i=0;i<n;i++){arr2[i]=arr[i];}
+    cout<<endl;
+    cout<<"ARRAY BEFORE SORTING : ";printarr(arr,n);
+    //Calling insertion sort using in-place algorithm.
+    insertion_sort_IP(arr,n);
+    cout<<endl;
+    cout<<"ARRAY AFTER SORTING USING IN-PLACE ALGORITHM : ";
+    //printing the array
+    printarr(arr,n);
+    cout<<endl;
+    //calling insertiong sort using out-place algorithm.
+    insertion_sort_OP(arr2,0,n-1);
+    cout<<"ARRAY AFTER SORTING USING OUT-PLACE ALGORITHM : ";
+    //printing the array
+    printarr(arr,n);
+    cout<<endl;
+
 }

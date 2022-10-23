@@ -14,6 +14,7 @@ class Queue{
             qfront = 0;
             rear = 0;
         }
+        
     void enqueue(int data){
         if(rear == size){
             cout << "Queue is Full";
