@@ -120,6 +120,136 @@ void print(Node* &head){
     }
 }
 
+Node* reveseLL(Node* head){
+
+    if(head == NULL or head -> next == NULL){
+        return head;
+    }
+
+    Node* curr = head;
+    Node* prev = NULL;
+    Node* fwd = NULL;
+
+    while(curr != NULL){
+        fwd = curr -> next;
+        curr -> next = prev;
+        prev = curr;
+        curr = fwd; 
+    }
+    return prev;
+}
+
+void printReverse(Node *head){
+    if(head == NULL){
+        return;
+    }
+    printReverse(head -> next);
+    cout << head-> data << " ";
+}
+
+Node* midpoint(Node* head){
+    if(head == NULL or head -> next == NULL){
+        return head;
+    }
+
+    Node* slow = head;
+    Node* fast = head -> next;
+
+    if(head != NULL){
+        while(fast != NULL and fast -> next != NULL){
+            fast = fast -> next -> next;
+            slow = slow -> next;
+        }
+        return slow;
+    }
+}
+
+Node* kReverse(Node* head, int k){
+    if(head == NULL){
+        return head;
+    }
+    Node* curr = head;
+    Node* prev = NULL;
+    Node* fwd = NULL;
+    int count = 0;
+
+    while(curr != NULL and count < k){
+        fwd = curr -> next;
+        curr -> next = prev;
+        prev = curr;
+        curr = curr -> next;
+        count++;
+    }
+    if(fwd != NULL){
+        head -> next = kReverse(fwd, k);
+    }
+    return prev;
+}
+
+bool isCircular(Node* head){
+    // Write your code here
+    if(head == NULL){
+        return NULL;
+    }
+    Node* temp = head -> next;
+    while(temp != NULL && temp != head){
+        temp = temp -> next;
+    }
+    
+    if(temp == head){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+Node* floyddetectLoop(Node* head){
+    if(head == NULL){
+        return false;
+    }
+    Node* slow = head;
+    Node* fast = head;
+
+    while(slow != NULL and fast != NULL and fast -> next != NULL){
+        slow = slow -> next;
+        fast = fast -> next -> next;
+        if(slow == fast){
+            return slow;
+        }
+    }
+    return NULL;
+}
+
+Node* getstartingNode(Node* head){
+    if(head == NULL){
+        return head;
+    }
+    Node* intersection = floyddetectLoop(head);
+    Node* slow = head;
+
+    while(slow != intersection){
+        slow = slow -> next;
+        intersection = intersection -> next;
+    }
+    return slow;
+}
+
+void removeLoop(Node* head){
+    if(head == NULL){
+        return;
+    }
+    Node* startofLoop = getstartingNode(head);
+    Node* temp = startofLoop;
+
+    while(temp -> next != startofLoop){
+        temp = temp -> next;
+    }
+    temp -> next == NULL;
+}
+
+
+
 int main(){
 
     Node* node1 = new Node(10);

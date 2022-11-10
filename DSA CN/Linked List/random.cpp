@@ -201,6 +201,30 @@ Node *removeDuplicates(Node *head)
     return head;
 }
 
+Node *removeDuplicatesUnsorted(Node *head)
+{
+    // Write your code here
+    if(head == NULL){
+        return head;
+    }
+    Node* temp1 = head;
+    while(temp1 != NULL){
+        Node* temp2 = head -> next;
+        while(temp2 != NULL){
+            if(temp1 -> next != NULL && (temp1 -> data == temp2 -> data)){
+                Node* waste = temp2;
+                temp2 = temp2 -> next;
+                delete(waste);
+                
+            }
+            else{
+                temp2 = temp2 -> next;
+            }
+        }
+        temp1 = temp1 -> next;
+    }
+}
+
 void printReverse(Node *head)
 {
     if(head == NULL){
@@ -208,6 +232,257 @@ void printReverse(Node *head)
     }
     printReverse(head -> next);
     cout << head-> data << " ";
+}
+
+Node *midPoint(Node *head)
+{
+    if(head == NULL){
+        return head;
+    }
+    
+    Node* slow = head;
+    Node* fast = head -> next;
+    
+    
+    if(head != NULL){
+        while(fast != NULL && fast -> next != NULL){
+             slow = slow -> next;
+            fast = fast -> next -> next;
+        }
+        return slow;
+    }
+}
+
+Node *mergeTwoSortedLinkedLists(Node *head1, Node *head2)
+ {
+    if(head1 == NULL){
+        return head2;
+    }
+    if(head2 == NULL){
+        return head1;
+    }
+    Node *fh=NULL,*ft=NULL; 
+    while(head1!=NULL && head2!=NULL){
+        if(head1->data < head2->data){ 
+            if(fh==NULL){ 
+                fh=head1;
+                ft=head1;
+            } 
+            else {
+                ft->next=head1;
+                ft=head1;
+            }
+            head1=head1->next;
+        }
+        else {
+            if(fh==NULL){ 
+                fh=head2;
+                ft=head2;
+            }
+            else {
+                ft->next=head2;
+                ft=head2;
+            }
+            head2=head2->next;
+        }
+    }
+    if(head1!=NULL)
+        ft->next=head1;
+    if(head2!=NULL)
+        ft->next=head2;
+    return fh;
+}
+
+Node* sortList012(Node *head)
+{
+    // Write your code here.
+    int count0 = 0;
+    int count1 = 0;
+    int count2 = 0;
+    Node* temp = head;
+    while(temp != NULL){
+        if(temp -> data == 0){
+            count0++;
+        }
+        else if(temp -> data == 1){
+            count1++;
+        }
+        else{
+            count2++;
+        }
+        temp = temp -> next;
+    }
+    temp = head;
+    while(temp != NULL){
+        if(count0 != 0){
+            temp -> data = 0;
+            count0--;
+        }
+        else if(count1 != 0){
+            temp -> data = 1;
+            count1--;
+        }
+        else if(count2 != 0){
+            temp -> data = 2;
+            count2--;
+        }
+        temp = temp -> next;
+    }
+    return head;
+}
+
+bool checkPalindrome(vector<int> v){
+    int n = v.size();
+    int s = 0;
+    int e = n-1;
+
+    while(s <= e){
+        if(v[s] != v[e]){
+            return 0;
+            s++;
+            e--;
+        }
+        return 1;
+    }
+}
+
+bool isPalindrome(Node* head){
+    vector<int> v;
+    Node* temp = head;
+
+    while(temp != NULL){
+        v.push_back(temp -> data);
+        temp = temp -> next;
+    }
+
+    return checkPalindrome(v);
+}
+
+// Node* reverse(Node* head){
+//     Node* curr = head;
+//     Node* prev = NULL;
+//     Node* next = NULL;
+
+//     while(curr != NULL){
+//         next = curr -> next;
+//         curr -> next = prev;
+//         prev = curr;
+//         curr = next;
+//     }
+//     return prev;
+// }
+// void insertatTail(Node* &head, Node* &tail, int val){
+//     Node* temp = new Node(val);
+//     // empty list
+//     if(head == NULL){
+//         head = temp;
+//         tail = temp;
+//         return;
+//     }
+//     else{
+//         tail -> next = temp;
+//         tail = temp;
+//     }
+// }
+// Node* add(Node* first, Node* second){
+//     int carry = 0;
+//     Node* ansHead = NULL;
+//     Node* ansTail = NULL;
+
+//     while(first != NULL and second != NULL){
+//         int sum = carry + first -> data + second -> data;
+//         int digit = sum % 10;
+//         Node* temp = new Node(digit);
+
+//         insertatTail(ansHead, ansTail, digit);
+
+//         carry = sum / 10;
+//         first = first -> next;
+//         second = second -> next;
+//     }
+// }
+
+// Node* addtwoLL(Node* first, Node* second){
+//     // step 1 reverse both LL 
+//     reverse(first);
+//     reverse(second);
+
+//     // step 2 add them
+//     Node* ans = add(first, second);
+//     ans = reverse(ans);
+//     return ans;
+// }
+
+Node* findmid(Node* head){
+    Node* slow = head;
+    Node* fast = head -> next;
+
+    while(fast != NULL and fast -> next != NULL){
+        slow = slow -> next;
+        fast = fast -> next -> next;
+    }
+    return slow;
+}
+
+Node* merge(Node* left, Node* right){
+    if(left == NULL){
+        return right;
+    }
+    if(right == NULL){
+        return left;
+    }
+
+    Node* ans = new Node(-1);
+    Node* temp = ans;
+
+    while(left != NULL and right != NULL){
+        if(left -> data <= right -> data){
+            temp -> next = left;
+            temp = left;
+            left = left -> next;
+        }
+        else{
+            temp -> next = right;
+            temp = right;
+            right = right -> next;
+        }
+    }
+
+    while(left != NULL){
+        temp -> next = left;
+        temp = left;
+        left = left -> next;
+    }
+
+    while(right != NULL){
+        temp -> next = right;
+        temp = right;
+        right = right -> next;
+    }
+    ans = ans -> next;
+    return ans;
+}
+
+Node* mergesort(Node* head){
+    // base case
+    if(head == NULL or head -> next == NULL){
+        return head;
+    }
+
+    // break LL in two halves after finding mid
+    Node* mid = findmid(head);
+    Node* left = head;
+    Node* right = mid -> next;
+    mid -> next = NULL;
+
+    // recursive calls to sort both the halves
+    left = mergesort(left);
+    right = mergesort(right);
+
+    // merge both halves
+    Node* result = merge(left, right);
+
+    return result;
 }
 
 int main(){

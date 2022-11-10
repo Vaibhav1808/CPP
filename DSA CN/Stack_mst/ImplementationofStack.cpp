@@ -6,11 +6,13 @@ class Stack{
         int * arr;
         int size;
         int top;
+
     Stack(int size){ 
         this -> size = size;
         arr = new int[size];
         top = -1;
     }
+    
     void Push(int element){
         if(size - top > 1){
             top++;
