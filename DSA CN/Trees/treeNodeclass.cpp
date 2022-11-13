@@ -335,6 +335,20 @@ treeNode<int> *getNextLargerElement(treeNode<int> *root, int x) {
     return ans;
 }
 
+int depth = 0;
+void replaceWithDepthValue(treeNode<int>* root) {
+    if(root == NULL){
+    return;
+    }
+
+    root->data = depth;
+    for(int i = 0; i < root -> children.size(); i++){
+        depth++;
+        replaceWithDepthValue(root -> children[i]);
+    }
+    depth--;
+}
+
 int main(){
     /*treeNode<int>* root = new treeNode<int>(1);
     treeNode<int>* node1 = new treeNode<int>(2);

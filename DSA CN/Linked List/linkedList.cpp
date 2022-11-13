@@ -206,7 +206,7 @@ bool isCircular(Node* head){
 
 Node* floyddetectLoop(Node* head){
     if(head == NULL){
-        return false;
+        return NULL;
     }
     Node* slow = head;
     Node* fast = head;
