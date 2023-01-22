@@ -2,15 +2,16 @@
 using namespace std;
 
 int main() {
-int a;
-long b;
-char c;
-string d;
-string e;
-
-
-cin >> a >> b >> c >> d >> e;
-cout << a << endl << b << endl << c << endl << d << endl<< e << endl; 
-      
-    return 0;
+    int x;
+        cin >> x;
+        
+        while(x > 0){
+            if(x%10 == 7){
+                cout << "Yes" << endl;
+                break;
+            }
+            x = x/10;
+        }
+        cout << "No" << endl;
+	return 0;
 }
