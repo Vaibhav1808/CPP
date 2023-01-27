@@ -1,9 +1,10 @@
 #include <vector>
+using namespace std;
 
 class PriorityQueue {
     // Declare the data members here
     vector<int> pq;
-    
+
 
    public:
     PriorityQueue() {
@@ -84,7 +85,7 @@ class PriorityQueue {
         return ans;
     }
 
-    int getSize() { 
+    int getSize() {
         // Implement the getSize() function here
         return pq.size();
     }

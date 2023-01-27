@@ -1,19 +1,19 @@
 #include <bits/stdc++.h>
-
+using namespace std;
 class PriorityQueue{
     vector<int> pq;
-    
+
     public:
     PriorityQueue(){
     }
 
     bool IsEmpty(){
-        return pq.size == 0;
+        return pq.size() == 0;
     }
 
    int getSize(){
     return pq.size();
-   } 
+   }
 
    int getMin(){
     if(IsEmpty()){
@@ -35,13 +35,14 @@ class PriorityQueue{
             pq[parentIndex] = temp;
         }
         else{
-            break; 
+            break;
         }
         childIndex = parentIndex;
-    }
-    
-    int removeMin() {
-        if(isEmpty()){
+        }
+   }
+
+    int removeMin(){
+        if(IsEmpty()){
             return 0;
         }
 
@@ -58,7 +59,7 @@ class PriorityQueue{
 
         while(lci < pq.size()){
             int minIndex = pi;
- 
+
             if(pq[lci] < pq[minIndex]){
                 minIndex = lci;
             }
@@ -70,7 +71,7 @@ class PriorityQueue{
             if(pi == minIndex){
                 break;
             }
-            
+
             int temp = pq[minIndex];
             pq[minIndex] = pq[pi];
             pq[pi] = temp;
@@ -81,5 +82,4 @@ class PriorityQueue{
         }
         return ans;
     }
-   }
 };
