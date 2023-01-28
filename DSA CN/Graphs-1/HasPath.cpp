@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
 bool hasPath(int n, bool **edges, bool *visited, int start, int end){
     if(start >= n or end >= n){
         return false;
