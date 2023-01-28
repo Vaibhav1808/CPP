@@ -31,7 +31,7 @@ void BFS(int **edges, int n){
     }
     for(int i = 0; i < n; i++){
         if(!visited[i]){
-            printBFS(edges,n,0,visited);
+            printBFS(edges,n,i,visited);
         }
     }
     delete[] visited;
@@ -93,7 +93,7 @@ int main(){
 
     cout << "BFS" << endl;
     BFS(edges,n);
- 
+
     for(int i = 0; i < n; i++){
         delete[] edges[i];
     }
