@@ -1,20 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool hasPath(int n, bool **edges, bool *visited, int v1, int v2){
-    if(v1 >= n or v2 >= n){
+bool hasPath(int n, bool **edges, bool *visited, int start, int end){
+    if(start >= n or end >= n){
         return false;
     }
-    if(v1 == v2){
+    if(start == end){
         return true;
     }
-    if (edges[v1][v2] or edges[v2][v1]){
+    if (edges[start][end] or edges[end][start]){
         return true;
     }
+
     queue<int> pendingvertices;
 
-    pendingvertices.push(v1);
-    visited[v1] = true;
+    pendingvertices.push(start);
+    visited[start] = true;
 
     while(!pendingvertices.empty()){
         int currentVertex = pendingvertices.front();
@@ -30,8 +31,9 @@ bool hasPath(int n, bool **edges, bool *visited, int v1, int v2){
                 pendingvertices.push(i);
                 visited[i] = true;
             }
-        }    
-        if(visited[v2]){
+        }
+
+        if(visited[end]){
             return true;
         }
     }
@@ -62,10 +64,10 @@ int main() {
     for(int i = 0; i < n; i++){
         visited[i] = false;
     }
-    int v1, v2;
-    cin >> v1 >> v2;
+    int start, end;
+    cin >> start >> end;
 
-    if (hasPath(n, edges, visited, v1, v2)){
+    if (hasPath(n, edges, visited, start, end)){
         cout << "true";
     }
     else{
